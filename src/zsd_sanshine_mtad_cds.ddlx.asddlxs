@@ -1,0 +1,97 @@
+@Metadata.layer: #CORE
+
+annotate entity ZSD_SANSHINE_PRJ_CDS
+    with 
+{
+   // Sayfa yapısını belirleyen Facet (Grup) tanımı
+  @UI.facet: [
+    { id: 'GeneralInfo',
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'Ürün ve Satış Bilgileri',
+      position: 10 }
+  ]
+
+  @UI: { lineItem:       [{ position: 10, label: 'Satış Başlığı' },
+                          { type: #FOR_ACTION, dataAction: 'setApproved', label: 'Siparişi Onayla' },
+                          { type: #FOR_ACTION, dataAction: 'callBAPI', label: 'Malzeme Güncelle' },
+                          { type: #FOR_ACTION, dataAction: 'GetData', label: 'Servis Kayıtları' }
+                          ],//Onayla butonum
+         identification: [{ position: 10, label: 'Satış Başlığı' },{ type: #FOR_ACTION, dataAction: 'callBAPI', label: 'Malzeme Güncelle' }], 
+                            selectionField: [{ position: 20 }] }
+  SalesDocument;
+
+  @UI: { lineItem:       [{ position: 20, label: 'Kalem No' },{ type: #FOR_ACTION, dataAction: 'sendMail', label: 'Mail Gönder' }],
+         identification: [{ position: 20, label: 'Kalem No' }] }
+  SalesDocumentItem;
+
+  @UI: { lineItem:       [{ position: 30, label: 'Müşteri No' }],
+         identification: [{ position: 30, label: 'Müşteri No' }],
+         selectionField: [{ position: 10 }] } // Arama çubuğuna ekler
+  Customer;
+
+  @UI: { lineItem:       [{ position: 40, label: 'Müşteri Adı' }],
+         identification: [{ position: 40, label: 'Müşteri Adı' }] }
+  CustomerName;
+
+  @UI: { lineItem:       [{ position: 50, label: 'Ürün' }],
+         identification: [{ position: 50, label: 'Ürün' }],
+         selectionField: [{ position: 20 }] }
+  Product;
+
+  @UI: { lineItem:       [{ position: 60, label: 'Ürün Tanımı' }],
+         identification: [{ position: 60, label: 'Ürün Tanımı' }] }
+  ProductDescription;
+
+  @UI: { lineItem:       [{ position: 70, label: 'Üretim Yeri' }],
+         identification: [{ position: 70, label: 'Üretim Yeri' }] }
+  Plant;
+
+  @UI: { lineItem:       [{ position: 80, label: 'Depo Yeri' }],
+         identification: [{ position: 80, label: 'Depo Yeri' }] }
+  StorageLocation;
+
+  @UI: { lineItem:       [{ position: 90, label: 'Birim' }],
+         identification: [{ position: 90, label: 'Birim' }] }
+  SalesUnit;
+
+  @UI: { lineItem:       [{ position: 100, label: 'Onay Tarihi' }],
+         identification: [{ position: 100, label: 'Onay Tarihi' }] }
+  ConfirmedDate;
+
+  // Detay sayfasında görülecek diğer alanlar
+  @UI.identification: [{ position: 110, label: 'Satış Bürosu' }]
+  SalesOffice;
+
+  @UI.identification: [{ position: 120, label: 'Satış Grubu' }]
+  SalesGroup;
+
+  @UI.identification: [{ position: 130, label: 'Dağıtım Kanalı' }]
+  DistributionChannel;
+
+  @UI.identification: [{ position: 140, label: 'Yaratan' }]
+  CreatedBy;
+
+  @UI.identification: [{ position: 150, label: 'Yaratma Tarihi' }]
+  CreatedDate;
+
+  @UI.identification: [{ position: 160, label: 'Red Nedeni' }]
+  RejectionReason;
+
+  @UI.identification: [{ position: 170, label: 'Parti' }]
+  Batch;
+
+  @UI.identification: [{ position: 180, label: 'Kısıtlama Göstergesi' }]
+  RestrictionIndicator;
+
+  @UI.identification: [{ position: 190, label: 'Bloke Göstergesi' }]
+  BlockedIndicator;
+
+  @UI.identification: [{ position: 200, label: 'Neden Açıklaması' }]
+  ReasonDescription;
+
+  @UI.identification: [{ position: 210, label: 'Açıklama 1' }]
+  Description1;
+
+  @UI.identification: [{ position: 220, label: 'Açıklama 2' }]
+  Description2;
+}

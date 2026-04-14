@@ -1,0 +1,69 @@
+managed implementation in class zbp_sd_sanshine_dm_cds unique;
+strict ( 2 );
+
+define behavior for ZSD_SANSHINE_DM_CDS with additional save//alias <alias_name>
+persistent table zbtp_product
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly: update ) SalesDocument, SalesDocumentItem;
+  //field ( mandatory ) SalesDocument, SalesDocumentItem;
+
+  //field ( features : instance ) Customer;
+
+  mapping for zbtp_product
+  {
+  //MANDT Mappinglemeye gerek yok.
+    SalesDocument       = vbeln;
+    SalesDocumentItem   = posnr;
+    Customer            = kunnr;
+    CustomerName        = name1;
+    SalesOffice         = vkbur;
+    SalesGroup          = vkgrp;
+    DistributionChannel = vtweg;
+    CreatedBy           = ernam;
+    CreatedDate         = erdat;
+    Product             = matnr_vbap;
+    ProductDescription  = arktx;
+    RejectionReason     = abgru;
+    SalesUnit           = vrkme;
+    ConfirmedDate       = zzconfirmed_date;
+    Plant               = werks;
+    StorageLocation     = lgort;
+    Batch               = charg;
+    RestrictionIndicator = kains;
+    BlockedIndicator     = kaspe;
+    ReasonDescription   = redtanim;
+    Description1        = bezei;
+    Description2        = bezei2;
+  }
+
+    // Test EML Fonksiyonu Local Handler Classın içine eklenir bu fonksiyonlar aşağıdaki gibidir:
+
+    //Veri Yazılmadan önce kontroller.
+    validation validateProduct on save { create; update; }
+
+
+    // Veri henüz veritabanına yazılmadan önce manipule etme.
+    determination TestFonksiyon on modify { create; }
+
+
+    //Onaylama işlemleri
+    action setApproved result [1] $self;
+    action callBAPI result [1] $self;
+
+     //Mail Gönderme işlemleri
+    action sendMail result [1] $self;
+
+    //Execute için action
+    action TestExecute result [1] $self;
+
+    //Servis Tetikleme
+    action GetData result [0..*] ZSD_API_ABSTARCT_ENTITY_CDS;
+
+
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Servis Definition'
+define service ZSD_SANSHINE_SRV {
+  expose ZSD_SANSHINE_PRJ_CDS;
+}
